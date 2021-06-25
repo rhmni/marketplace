@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'app_account.apps.AppAccountConfig',
+    'app_store.apps.AppStoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -92,6 +93,15 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # Active User
 AUTH_USER_MODEL = 'app_account.User'
+
+# Toman
+MIN_CHECKOUT = 10000
+MAX_CHECKOUT = 100000
+
+# Length of Bank Number
+BANK_NUMBER_LENGTH = 16
+
+
+
