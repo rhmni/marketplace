@@ -107,3 +107,9 @@ MAX_CHECKOUT = 100000
 
 # Length of Bank Number
 BANK_NUMBER_LENGTH = 16
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
