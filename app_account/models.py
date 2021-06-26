@@ -25,7 +25,7 @@ class User(AbstractBaseUser):
     name = models.CharField(max_length=150)
     register_date = models.DateTimeField(null=True, blank=True)
     confirm_date = models.DateTimeField(null=True, blank=True)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_seller = models.BooleanField(default=False)
 

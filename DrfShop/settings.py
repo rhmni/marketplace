@@ -16,8 +16,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third Parti Apps
+    'rest_framework',
+
+    # Local Apps
     'app_account.apps.AppAccountConfig',
     'app_store.apps.AppStoreConfig',
+    'app_product.apps.AppProductConfig',
 ]
 
 MIDDLEWARE = [
@@ -102,6 +107,3 @@ MAX_CHECKOUT = 100000
 
 # Length of Bank Number
 BANK_NUMBER_LENGTH = 16
-
-
-
