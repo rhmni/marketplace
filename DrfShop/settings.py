@@ -108,6 +108,22 @@ MAX_CHECKOUT = 100000
 # Length of Bank Number
 BANK_NUMBER_LENGTH = 16
 
+# Time For Expire SMS
+TIME_EXPIRE = 150
+
+KAVENEGAR_SECRET_KEY = "it's private"
+
+# Redis Config
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+
+# Redis DB Numbers
+PHONE_REGISTER_DB = 1
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
+CELERY_RESULT_BACKEND = 'rpc://'
+
+# Rest Framework Config
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
