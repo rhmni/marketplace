@@ -3,6 +3,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 
+from app_product.managers import ConfirmedProductManager
 from app_store.models import Store
 
 
@@ -49,6 +50,9 @@ class Product(models.Model):
     is_confirm = models.BooleanField(default=False)
     is_exists = models.BooleanField(default=False)
     register_date = models.DateTimeField()
+
+    objects = models.Manager()
+    confirmed = ConfirmedProductManager()
 
     def __str__(self):
         return self.name
