@@ -33,7 +33,7 @@ class UserChangeForm(forms.ModelForm):
     class Meta:
         model = User
         fields = (
-            'confirm_date',
+            'last_update',
             'password',
             'name',
             'is_active',

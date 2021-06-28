@@ -24,7 +24,7 @@ class User(AbstractBaseUser):
     )
     name = models.CharField(max_length=150)
     register_date = models.DateTimeField(null=True, blank=True)
-    confirm_date = models.DateTimeField(null=True, blank=True)
+    last_update = models.DateTimeField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     is_seller = models.BooleanField(default=False)
@@ -41,9 +41,6 @@ class User(AbstractBaseUser):
 
         if not self.register_date:
             self.register_date = datetime.now()
-
-        if self.is_active and not self.confirm_date:
-            self.confirm_date = datetime.now()
 
         super(User, self).save(*args, **kwargs)
 

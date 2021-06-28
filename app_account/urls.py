@@ -22,4 +22,7 @@ urlpatterns = [
 
     # User Change Password
     path('change-password/', views.UserChangePassword.as_view(), name='change_password'),
+
+    # User Edit Profile
+    path('edit-profile/', views.UserEditProfileView.as_view(), name='edit_user'),
 ]

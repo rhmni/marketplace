@@ -82,3 +82,16 @@ class UserChangePasswordSerializer(serializers.Serializer):
         if not any(char.isalpha() for char in password):
             raise serializers.ValidationError('Password must contain alpha.')
         return password
+
+
+class UserEditProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'name',
+            'last_update',
+        )
+
+        read_only_fields = (
+            'last_update',
+        )
