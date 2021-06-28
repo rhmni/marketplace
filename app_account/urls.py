@@ -9,8 +9,8 @@ from app_account import views
 app_name = 'account'
 urlpatterns = [
     # JWT Authentication
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # User Register Verification
     path('register/', views.UserRegisterView.as_view(), name='user_register'),

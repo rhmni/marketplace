@@ -10,9 +10,14 @@ from app_account.serializers import UserRegisterSerializer, UserVerificationSeri
 
 import redis
 
+from permissions import IsAnonymoused
+
 
 class UserRegisterView(APIView):
     serializer_class = UserRegisterSerializer
+    permission_classes = (
+        IsAnonymoused,
+    )
 
     def post(self, request):
         srz_data = self.serializer_class(data=request.data)
@@ -24,6 +29,9 @@ class UserRegisterView(APIView):
 
 class UserVerificationView(APIView):
     serializer_class = UserVerificationSerializer
+    permission_classes = (
+        IsAnonymoused,
+    )
 
     def post(self, request):
         srz_data = self.serializer_class(data=request.data)
