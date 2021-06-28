@@ -19,4 +19,7 @@ urlpatterns = [
     # User Forget Password
     path('forget-password/', views.UserForgetPassword.as_view(), name='forget_password'),
     path('forget-password/verify/', views.UserVerificationPasswordView.as_view(), name='forget_password_verify'),
+
+    # User Change Password
+    path('change-password/', views.UserChangePassword.as_view(), name='change_password'),
 ]

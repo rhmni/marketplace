@@ -1,13 +1,14 @@
 from django.conf import settings
 
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from app_account.models import User
 from app_account.tasks import send_sms_user_register, send_sms_forget_password
 from app_account.serializers import UserRegisterSerializer, UserVerificationSerializer, \
-    UserVerificationPasswordSerializer, UserForgetSerializer
+    UserVerificationPasswordSerializer, UserForgetSerializer, UserChangePasswordSerializer
 
 import redis
 
@@ -65,7 +66,7 @@ class UserVerificationView(APIView):
 
 class UserForgetPassword(APIView):
     """
-        check phone number and if exists in db, send sms
+    check phone number and if exists in db, send sms
     """
     serializer_class = UserForgetSerializer
     permission_classes = (
@@ -119,3 +120,23 @@ class UserVerificationPasswordView(APIView):
                     return Response({'message': 'your password changed'}, status=status.HTTP_201_CREATED)
                 return Response({'message': 'your code is wrong'}, status=status.HTTP_400_BAD_REQUEST)
             return Response({'message': 'your code is wrong'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserChangePassword(APIView):
+    """
+    if old password is correct set new password
+    """
+    serializer_class = UserChangePasswordSerializer
+    permission_classes = (
+        IsAuthenticated,
+    )
+
+    def post(self, request):
+        srz_data = self.serializer_class(data=request.data)
+        if srz_data.is_valid(raise_exception=True):
+            data = srz_data.validated_data
+            if request.user.check_password(data['old_password']):
+                request.user.set_password(data['new_password'])
+                request.user.save()
+                return Response({'password changed.'}, status=status.HTTP_200_OK)
+            return Response({'old password is wrong.'}, status=status.HTTP_400_BAD_REQUEST)

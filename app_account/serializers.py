@@ -63,3 +63,22 @@ class UserVerificationPasswordSerializer(serializers.Serializer):
         if not any(char.isalpha() for char in password):
             raise serializers.ValidationError('Password must contain alpha.')
         return password
+
+
+class UserChangePasswordSerializer(serializers.Serializer):
+    old_password = serializers.CharField(max_length=70)
+    new_password = serializers.CharField(max_length=70)
+
+    def validate_new_password(self, password):
+        if not any(char.isdigit() for char in password):
+            raise serializers.ValidationError('Password must contain digit.')
+        if not any(char.isalpha() for char in password):
+            raise serializers.ValidationError('Password must contain alpha.')
+        return password
+
+    def validate_old_password(self, password):
+        if not any(char.isdigit() for char in password):
+            raise serializers.ValidationError('Password must contain digit.')
+        if not any(char.isalpha() for char in password):
+            raise serializers.ValidationError('Password must contain alpha.')
+        return password
