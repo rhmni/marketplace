@@ -1,12 +1,9 @@
 from pathlib import Path
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-qyah92hhkwflcf7!mz=(66^iio8_)el-*dpc$og_mfv@kcr4z9'
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
+SECRET_KEY = config('SECRET_KEY')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -56,16 +53,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'DrfShop.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -111,17 +98,17 @@ BANK_NUMBER_LENGTH = 16
 # Time For Expire SMS
 TIME_EXPIRE = 150
 
-KAVENEGAR_SECRET_KEY = "it's private"
+KAVENEGAR_SECRET_KEY = config('KAVENEGAR_SECRET_KEY')
 
 # Redis Config
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
+REDIS_HOST = config('REDIS_HOST', default='localhost')
+REDIS_PORT = config('REDIS_PORT', cast=int, default=6379)
 
 # Redis DB Numbers
 PHONE_REGISTER_DB = 1
 
-CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
-CELERY_RESULT_BACKEND = 'rpc://'
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='amqp://guest:guest@localhost')
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='rpc://')
 
 # Rest Framework Config
 REST_FRAMEWORK = {
