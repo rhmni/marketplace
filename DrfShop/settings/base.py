@@ -106,6 +106,7 @@ REDIS_PORT = config('REDIS_PORT', cast=int, default=6379)
 
 # Redis DB Numbers
 PHONE_REGISTER_DB = 1
+FORGET_PASSWORD_DB = 2
 
 CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='amqp://guest:guest@localhost')
 CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='rpc://')
