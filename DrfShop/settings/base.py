@@ -13,13 +13,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Third Parti Apps
+    # Third Party Apps
     'rest_framework',
+    'django_celery_beat',
 
     # Local Apps
     'app_account.apps.AppAccountConfig',
     'app_store.apps.AppStoreConfig',
     'app_product.apps.AppProductConfig',
+    'app_ticket.apps.AppTicketConfig',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +72,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
