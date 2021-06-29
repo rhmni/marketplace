@@ -11,13 +11,12 @@ def bank_number_validate(value):
 
 
 class Store(models.Model):
-    founder = models.ForeignKey(
+    founder = models.OneToOneField(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         limit_choices_to={
             'is_seller': True
         },
-        related_name='stores',
     )
     slug = models.SlugField(max_length=100, unique=True)
     name = models.CharField(max_length=200)

@@ -24,3 +24,31 @@ class IsOwnerOfTicket(BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return bool(obj.owner == request.user)
+
+
+class IsSeller(BasePermission):
+    """
+    Allow access only user that is seller
+    """
+
+    message = 'permission denied, you are not seller user'
+
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user
+
+    def has_object_permission(self, request, view, obj):
+        return bool(obj.is_seller)
+
+
+class IsSellerOfProduct(BasePermission):
+    """
+    Allow access only user that seller of product
+    """
+
+    message = 'permission denied, you are not seller of this product'
+
+    def has_permission(self, request, view):
+        return request.user.is_authenticated and request.user
+
+    def has_object_permission(self, request, view, obj):
+        return bool(obj.seller.founder == request.user and request.user.is_seller)

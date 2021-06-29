@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('is_confirm', models.BooleanField(default=False)),
                 ('wallet', models.PositiveBigIntegerField(default=0)),
                 ('bank_number', models.PositiveBigIntegerField(validators=[app_store.models.bank_number_validate])),
-                ('founder', models.ForeignKey(limit_choices_to={'is_seller': True}, on_delete=django.db.models.deletion.CASCADE, related_name='stores', to=settings.AUTH_USER_MODEL)),
+                ('founder', models.OneToOneField(limit_choices_to={'is_seller': True}, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(

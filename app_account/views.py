@@ -18,6 +18,7 @@ class UserRegisterView(APIView):
     """
     get user data and send sms for verification phone number
     """
+
     serializer_class = serializers.UserRegisterSerializer
     permission_classes = (
         IsAnonymoused,
@@ -35,6 +36,7 @@ class UserVerificationView(APIView):
     """
     check user otp code and create new user
     """
+
     serializer_class = serializers.UserVerificationSerializer
     permission_classes = (
         IsAnonymoused,
@@ -67,6 +69,7 @@ class UserForgetPassword(APIView):
     """
     check phone number and if exists in db, send sms
     """
+
     serializer_class = serializers.UserForgetSerializer
     permission_classes = (
         IsAnonymoused,
@@ -89,6 +92,7 @@ class UserVerificationPasswordView(APIView):
     """
     check user otp code and password and change the password if otp code is correct
     """
+
     serializer_class = serializers.UserVerificationPasswordSerializer
     permission_classes = (
         IsAnonymoused,
@@ -125,6 +129,7 @@ class UserChangePassword(APIView):
     """
     if old password is correct set new password
     """
+
     serializer_class = serializers.UserChangePasswordSerializer
     permission_classes = (
         IsAuthenticated,
@@ -145,6 +150,7 @@ class UserEditProfileView(APIView):
     """
     update profile of user
     """
+
     serializer_class = serializers.UserEditProfileSerializer
     permission_classes = (
         IsAuthenticated,
