@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 
 from django.core.exceptions import ValidationError
@@ -33,6 +34,13 @@ class Ticket(models.Model):
 
     def __str__(self):
         return self.subject
+
+    def save(self, *args, **kwargs):
+
+        if not self.pk:
+            self.last_update = datetime.now()
+
+        super().save(*args, **kwargs)
 
 
 class TicketMessage(models.Model):

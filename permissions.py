@@ -12,7 +12,7 @@ class IsAnonymoused(BasePermission):
         return bool(request.user.is_anonymous)
 
 
-class IsOwnerOrReadOnlyTicket(BasePermission):
+class IsOwnerOfTicket(BasePermission):
     """
     Allow access only user that owner of ticket
     """

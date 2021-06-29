@@ -8,7 +8,6 @@ class TicketSerializer(serializers.ModelSerializer):
         model = Ticket
         fields = (
             'id',
-            'owner',
             'category',
             'subject',
             'is_open',
@@ -24,4 +23,36 @@ class TicketMessageSerializer(serializers.ModelSerializer):
             'file',
             'register_date',
             'is_reply',
+        )
+
+
+class CreateTicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = (
+            'owner',
+            'category',
+            'subject',
+            'open_date',
+        )
+
+        read_only_fields = (
+            'owner',
+            'open_date',
+        )
+
+
+class CreateTicketMessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TicketMessage
+        fields = (
+            'ticket',
+            'message',
+            'file',
+            'register_date',
+        )
+
+        read_only_fields = (
+            'ticket',
+            'register_date',
         )

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
@@ -5,15 +7,15 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from app_ticket.models import Ticket
-from app_ticket.serializers import TicketSerializer, TicketMessageSerializer
-from permissions import IsOwnerOrReadOnlyTicket
+from app_ticket import serializers
+from permissions import IsOwnerOfTicket
 
 
-class TickectListView(APIView):
+class TicketListView(APIView):
     """
     get list of user tickets
     """
-    serializer_class = TicketSerializer
+    serializer_class = serializers.TicketSerializer
 
     permission_classes = (
         IsAuthenticated,
@@ -25,15 +27,15 @@ class TickectListView(APIView):
         return Response(data=srz_data.data, status=status.HTTP_200_OK)
 
 
-class TickectMessageListView(APIView):
+class TicketMessageListView(APIView):
     """
     get list of user message ticket
     """
 
-    serializer_class = TicketMessageSerializer
+    serializer_class = serializers.TicketMessageSerializer
 
     permission_classes = (
-        IsOwnerOrReadOnlyTicket,
+        IsOwnerOfTicket,
     )
 
     def get(self, request, ticket_id):
@@ -42,3 +44,49 @@ class TickectMessageListView(APIView):
         ticket_messages = ticket.ticketmessages.all()
         srz_data = self.serializer_class(instance=ticket_messages, many=True)
         return Response(data=srz_data.data, status=status.HTTP_200_OK)
+
+
+class TicketCreateView(APIView):
+    """
+    create new ticket
+    """
+
+    serializer_class = serializers.CreateTicketSerializer
+
+    permission_classes = (
+        IsAuthenticated,
+    )
+
+    def post(self, request):
+        srz_data = self.serializer_class(data=request.data)
+        if srz_data.is_valid(raise_exception=True):
+            srz_data.save(
+                owner=request.user,
+                open_date=datetime.now(),
+            )
+            return Response({'message': 'ticket created.'}, status=status.HTTP_201_CREATED)
+
+
+class TicketMessageCreateView(APIView):
+    """
+    create new ticket message
+    """
+
+    serializer_class = serializers.CreateTicketMessageSerializer
+
+    permission_classes = (
+        IsOwnerOfTicket,
+    )
+
+    def post(self, request, ticket_id):
+        ticket = get_object_or_404(Ticket, pk=ticket_id)
+        if ticket.is_open:
+            self.check_object_permissions(request, ticket)
+            srz_data = self.serializer_class(data=request.data)
+            if srz_data.is_valid(raise_exception=True):
+                srz_data.save(
+                    ticket=ticket,
+                    register_date=datetime.now(),
+                )
+                return Response({'message': 'ticket message created.'}, status=status.HTTP_201_CREATED)
+        return Response({'message': 'this ticket is already closed, open a new'}, status=status.HTTP_400_BAD_REQUEST)
