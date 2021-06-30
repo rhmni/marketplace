@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from django.db import models
-from django.contrib.contenttypes.models import ContentType
 
 from app_product.managers import ConfirmedProductManager
 from app_store.models import Store
@@ -31,9 +30,6 @@ class Product(models.Model):
     seller = models.ForeignKey(
         to=Store,
         on_delete=models.CASCADE,
-        limit_choices_to={
-            'is_confirm': True,
-        },
         related_name='products',
     )
     category = models.ForeignKey(

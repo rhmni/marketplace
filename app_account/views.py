@@ -16,7 +16,7 @@ from app_account import serializers
 
 class UserRegisterView(APIView):
     """
-    get user data and send sms for verification phone number
+        get user data and send sms for verification phone number
     """
 
     serializer_class = serializers.UserRegisterSerializer
@@ -34,7 +34,7 @@ class UserRegisterView(APIView):
 
 class UserVerificationView(APIView):
     """
-    check user otp code and create new user
+        check user otp code and create new user
     """
 
     serializer_class = serializers.UserVerificationSerializer
@@ -67,7 +67,7 @@ class UserVerificationView(APIView):
 
 class UserForgetPassword(APIView):
     """
-    check phone number and if exists in db, send sms
+        check phone number and if exists in db, send sms
     """
 
     serializer_class = serializers.UserForgetSerializer
@@ -90,7 +90,7 @@ class UserForgetPassword(APIView):
 
 class UserVerificationPasswordView(APIView):
     """
-    check user otp code and password and change the password if otp code is correct
+        check user otp code and password and change the password if otp code is correct
     """
 
     serializer_class = serializers.UserVerificationPasswordSerializer
@@ -127,7 +127,7 @@ class UserVerificationPasswordView(APIView):
 
 class UserChangePassword(APIView):
     """
-    if old password is correct set new password
+        if old password is correct set new password
     """
 
     serializer_class = serializers.UserChangePasswordSerializer
@@ -148,7 +148,7 @@ class UserChangePassword(APIView):
 
 class UserEditProfileView(APIView):
     """
-    update profile of user
+        update profile of user
     """
 
     serializer_class = serializers.UserEditProfileSerializer

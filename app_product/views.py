@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from app_product.serializers import ProfileProductSerializer
 from app_product.models import Product
 from app_product.serializers import ProductGetSerializer
-from permissions import IsSeller, IsSellerOfProduct
+from permissions import IsSeller, IsSellerOfProduct, IsSellerAndHasStore
 
 
 class ProductListView(APIView):
@@ -55,7 +55,7 @@ class CreateProductView(APIView):
     serializer_class = ProfileProductSerializer
 
     permission_classes = (
-        IsSeller,
+        IsSellerAndHasStore,
     )
 
     def post(self, request):
@@ -114,7 +114,7 @@ class ProfileProductListView(APIView):
     serializer_class = ProfileProductSerializer
 
     permission_classes = (
-        IsSeller,
+        IsSellerAndHasStore,
     )
 
     def get(self, request):

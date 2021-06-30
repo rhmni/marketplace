@@ -7,13 +7,11 @@ class StoreAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'founder',
-        'is_confirm',
         'wallet',
         'register_date',
 
     )
     list_filter = (
-        'is_confirm',
         'register_date',
     )
 

@@ -120,14 +120,3 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
-
-JWT_AUTH = {
-
-    'JWT_EXPIRATION_DELTA': timedelta(days=2),
-
-    # allow refreshing of tokens
-    'JWT_ALLOW_REFRESH': True,
-
-
-    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
-}

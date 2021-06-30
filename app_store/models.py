@@ -3,6 +3,7 @@ from datetime import datetime
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings
+from django.db.models import Sum
 
 
 def bank_number_validate(value):
@@ -18,11 +19,10 @@ class Store(models.Model):
             'is_seller': True
         },
     )
-    slug = models.SlugField(max_length=100, unique=True)
     name = models.CharField(max_length=200)
+    slug = models.SlugField(max_length=100, unique=True)
     description = models.TextField()
     register_date = models.DateTimeField(null=True, blank=True)
-    is_confirm = models.BooleanField(default=False)
     wallet = models.PositiveBigIntegerField(default=0)
     bank_number = models.PositiveBigIntegerField(validators=[bank_number_validate])
 
@@ -40,9 +40,6 @@ class StoreCheckout(models.Model):
     store = models.ForeignKey(
         to=Store,
         on_delete=models.CASCADE,
-        limit_choices_to={
-            'is_confirm': True,
-        },
         related_name='checkouts',
     )
     pay_date = models.DateTimeField(
@@ -60,10 +57,6 @@ class StoreCheckout(models.Model):
         return self.store.name
 
     def clean(self):
-        try:
-            self.store
-        except:
-            raise ValidationError('please add a valid store')
 
         if not settings.MIN_CHECKOUT <= self.store.wallet:
             raise ValidationError(
