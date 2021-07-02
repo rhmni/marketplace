@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'app_store.apps.AppStoreConfig',
     'app_product.apps.AppProductConfig',
     'app_ticket.apps.AppTicketConfig',
+    'app_order.apps.AppOrderConfig',
 ]
 
 MIDDLEWARE = [
@@ -101,7 +102,10 @@ BANK_NUMBER_LENGTH = 16
 # Time For Expire SMS
 TIME_EXPIRE = 150
 
+# Send SMS
 KAVENEGAR_SECRET_KEY = config('KAVENEGAR_SECRET_KEY')
+
+CART_SESSION_ID = 'cart'
 
 # Redis Config
 REDIS_HOST = config('REDIS_HOST', default='localhost')
@@ -110,6 +114,8 @@ REDIS_PORT = config('REDIS_PORT', cast=int, default=6379)
 # Redis DB Numbers
 PHONE_REGISTER_DB = 1
 FORGET_PASSWORD_DB = 2
+
+SESSION_SAVE_EVERY_REQUEST = True
 
 CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='amqp://guest:guest@localhost')
 CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND', default='rpc://')
