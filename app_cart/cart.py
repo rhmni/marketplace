@@ -49,7 +49,7 @@ class Cart:
     def clear(self):
         del self.session[settings.CART_SESSION_ID]
 
-    def get_list(self, coupon=None):
+    def detail(self, coupon=None):
         self._check_product_exists()
         self._set_total_price()
         self._set_coupon(coupon)
@@ -78,7 +78,10 @@ class Cart:
         cart = self.cart
         product_ids = [product_id for product_id in self.cart.keys() if product_id.isnumeric()]
         for product_id in product_ids:
-            try:
-                Product.confirmed.get(pk=product_id)
-            except Product.DoesNotExist:
+            product = Product.confirmed.filter(pk=product_id)
+
+            if product.exists():
+                if product.first().stock < cart[product_id]['quantity']:
+                    del cart[product_id]
+            else:
                 del cart[product_id]

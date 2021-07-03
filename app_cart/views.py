@@ -31,9 +31,9 @@ class RetrieveCartView(APIView):
     def get(self, request, coupon=None):
 
         if coupon is not None:
-            cart_detail = Cart(request).get_list(coupon)
+            cart_detail = Cart(request).detail(coupon)
         else:
-            cart_detail = Cart(request).get_list()
+            cart_detail = Cart(request).detail()
 
         data = {}
         for key, value in cart_detail.items():

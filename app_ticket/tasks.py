@@ -16,16 +16,16 @@ def send_sms(phone, message):
         'receptor': phone,
         'message': message,
     }
-    print(message)
-    # response = api.sms_send(params)
+    response = api.sms_send(params)
 
 
 @shared_task
 def close_open_tickets():
     """
-    Close tickets that are open before 24 hours
-    And send sms to the user to know that his ticket is closed.
+        Close tickets that are open before 24 hours
+        And send sms to the user to know that his ticket is closed.
     """
+
     tickets = models.Ticket.opentickets.filter(
         last_update__lte=datetime.now() - timedelta(hours=24),
     )

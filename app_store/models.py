@@ -3,7 +3,7 @@ from datetime import datetime
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.conf import settings
-from django.db.models import Sum
+
 
 
 def bank_number_validate(value):
@@ -16,7 +16,7 @@ class Store(models.Model):
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         limit_choices_to={
-            'is_seller': True
+            'is_seller': True,
         },
     )
     name = models.CharField(max_length=200)
