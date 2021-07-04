@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
@@ -57,6 +58,7 @@ class TicketCreateView(APIView):
         IsAuthenticated,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def post(self, request):
         srz_data = self.serializer_class(data=request.data)
         if srz_data.is_valid(raise_exception=True):
@@ -78,6 +80,7 @@ class TicketMessageCreateView(APIView):
         IsOwnerOfTicket,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def post(self, request, ticket_id):
         ticket = get_object_or_404(Ticket, pk=ticket_id)
         if ticket.is_open:

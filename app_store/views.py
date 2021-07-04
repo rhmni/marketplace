@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.conf import settings
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -22,6 +23,7 @@ class CreateStoreView(APIView):
         IsSeller,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def post(self, request):
         self.check_object_permissions(request, request.user)
         try:
@@ -49,6 +51,7 @@ class UpdateStoreView(APIView):
         IsSellerAndHasStore,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def put(self, request):
         self.check_object_permissions(request, request.user)
         srz_data = self.serializer_class(data=request.data, instance=request.user.store, partial=True)
@@ -85,6 +88,7 @@ class StoreCheckoutView(APIView):
         IsSellerAndHasStore,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def post(self, request):
         self.check_object_permissions(request, request.user)
         srz_data = self.serializer_class(data=request.data)

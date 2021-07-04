@@ -6,7 +6,7 @@ app_name = 'product'
 urlpatterns = [
     # get 1 or list of products
     path('p/', views.ProductListView.as_view(), name='show_one_product'),
-    path('p/<int:product_id>/', views.ProductListView.as_view(), name='show_list_products'),
+    path('p/<product_id>/', views.ProductListView.as_view(), name='show_list_products'),
 
     # get products by category
     path('categories/<slug:category_slug>/', views.FilterProducByCategoryView.as_view(), name='show_category_filter_product'),

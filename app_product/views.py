@@ -3,11 +3,11 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
+from drf_yasg.utils import swagger_auto_schema
 from app_product.serializers import ProfileProductSerializer
 from app_product.models import Product
 from app_product.serializers import ProductGetSerializer
-from permissions import IsSeller, IsSellerOfProduct, IsSellerAndHasStore
+from permissions import IsSellerOfProduct, IsSellerAndHasStore
 
 
 class ProductListView(APIView):
@@ -58,6 +58,7 @@ class CreateProductView(APIView):
         IsSellerAndHasStore,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def post(self, request):
         self.check_object_permissions(request, request.user)
 
@@ -80,6 +81,7 @@ class UpdateProductView(APIView):
         IsSellerOfProduct,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def put(self, request, product_id):
         product = get_object_or_404(Product.confirmed, pk=product_id)
         self.check_object_permissions(request, product)

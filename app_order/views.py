@@ -12,6 +12,10 @@ from app_ticket.tasks import send_sms
 
 
 class OrderCheckoutView(APIView):
+    """
+        checkout for order
+    """
+
     permission_classes = (
         IsAuthenticated,
     )

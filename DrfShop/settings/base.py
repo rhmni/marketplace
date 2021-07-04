@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     # Third Party Apps
     'rest_framework',
     'django_celery_beat',
+    'drf_yasg',
 
     # Local Apps
     'app_account.apps.AppAccountConfig',

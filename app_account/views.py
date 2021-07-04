@@ -3,6 +3,7 @@ from datetime import datetime
 from django.conf import settings
 
 import redis
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -24,6 +25,7 @@ class UserRegisterView(APIView):
         IsAnonymoused,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def post(self, request):
         srz_data = self.serializer_class(data=request.data)
         if srz_data.is_valid(raise_exception=True):
@@ -42,6 +44,7 @@ class UserVerificationView(APIView):
         IsAnonymoused,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def post(self, request):
         srz_data = self.serializer_class(data=request.data)
         if srz_data.is_valid(raise_exception=True):
@@ -75,6 +78,7 @@ class UserForgetPassword(APIView):
         IsAnonymoused,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def post(self, request):
         srz_data = self.serializer_class(data=request.data)
         if srz_data.is_valid(raise_exception=True):
@@ -98,6 +102,7 @@ class UserVerificationPasswordView(APIView):
         IsAnonymoused,
     )
 
+    @swagger_auto_schema(request_body=serializer_class)
     def post(self, request):
         srz_data = self.serializer_class(data=request.data)
         if srz_data.is_valid(raise_exception=True):
@@ -135,7 +140,8 @@ class UserChangePassword(APIView):
         IsAuthenticated,
     )
 
-    def post(self, request):
+    @swagger_auto_schema(request_body=serializer_class)
+    def put(self, request):
         srz_data = self.serializer_class(data=request.data)
         if srz_data.is_valid(raise_exception=True):
             data = srz_data.validated_data
@@ -156,7 +162,8 @@ class UserEditProfileView(APIView):
         IsAuthenticated,
     )
 
-    def post(self, request):
+    @swagger_auto_schema(request_body=serializer_class)
+    def put(self, request):
         srz_data = self.serializer_class(data=request.data, instance=request.user)
         if srz_data.is_valid(raise_exception=True):
             srz_data.save(

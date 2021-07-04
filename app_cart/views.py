@@ -1,6 +1,7 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from drf_yasg.utils import swagger_auto_schema
 
 from app_cart.cart import Cart
 from app_cart.serializers import AddToCartSerializer
@@ -13,6 +14,7 @@ class AddToCartView(APIView):
 
     serializer_class = AddToCartSerializer
 
+    @swagger_auto_schema(request_body=serializer_class)
     def post(self, request):
         srz_data = self.serializer_class(data=request.data)
 
