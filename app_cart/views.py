@@ -1,4 +1,5 @@
 from rest_framework import status
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
@@ -25,7 +26,7 @@ class AddToCartView(APIView):
             return Response({'message': 'product added.'}, status=status.HTTP_200_OK)
 
 
-class RetrieveCartView(APIView):
+class RetrieveCartView(GenericAPIView):
     """
         get and retrieve cart of user and set coupon
     """

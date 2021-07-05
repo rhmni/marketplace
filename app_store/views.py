@@ -3,6 +3,7 @@ from datetime import datetime
 from django.conf import settings
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
+from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -60,7 +61,7 @@ class UpdateStoreView(APIView):
             return Response({'message': 'store updated'})
 
 
-class RetrieveStoreView(APIView):
+class RetrieveStoreView(GenericAPIView):
     """
         check and if user have store retrieve it
     """
@@ -118,7 +119,7 @@ class StoreCheckoutView(APIView):
             return Response({'message': 'checkout success.'}, status=status.HTTP_200_OK)
 
 
-class RetrieveStoreCheckout(APIView):
+class RetrieveStoreCheckout(GenericAPIView):
     """
         retrieve list of checkout for store
     """

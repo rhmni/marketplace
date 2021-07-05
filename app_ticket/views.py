@@ -2,7 +2,7 @@ from datetime import datetime
 
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
-from rest_framework.generics import get_object_or_404
+from rest_framework.generics import get_object_or_404, GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -12,9 +12,9 @@ from app_ticket import serializers
 from permissions import IsOwnerOfTicket
 
 
-class TicketListView(APIView):
+class TicketListView(GenericAPIView):
     """
-    get list of user tickets
+        get list of user tickets
     """
     serializer_class = serializers.TicketSerializer
 
@@ -28,9 +28,9 @@ class TicketListView(APIView):
         return Response(data=srz_data.data, status=status.HTTP_200_OK)
 
 
-class TicketMessageListView(APIView):
+class TicketMessageListView(GenericAPIView):
     """
-    get list of user message ticket
+        get list of user message ticket
     """
 
     serializer_class = serializers.TicketMessageSerializer
@@ -49,7 +49,7 @@ class TicketMessageListView(APIView):
 
 class TicketCreateView(APIView):
     """
-    create new ticket
+        create new ticket
     """
 
     serializer_class = serializers.CreateTicketSerializer
@@ -71,7 +71,7 @@ class TicketCreateView(APIView):
 
 class TicketMessageCreateView(APIView):
     """
-    create new ticket message
+        create new ticket message
     """
 
     serializer_class = serializers.CreateTicketMessageSerializer

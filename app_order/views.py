@@ -1,9 +1,10 @@
 from datetime import datetime
 
 from rest_framework import status
+from rest_framework.generics import GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.views import APIView
+
 
 from app_cart.cart import Cart
 from app_order.models import OrderItem, Order
@@ -11,7 +12,7 @@ from app_product.models import Product
 from app_ticket.tasks import send_sms
 
 
-class OrderCheckoutView(APIView):
+class OrderCheckoutView(GenericAPIView):
     """
         checkout for order
     """
