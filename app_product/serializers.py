@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from app_product.models import Product
+from app_product.models import Product, Category
 
 
 class ProductGetSerializer(serializers.ModelSerializer):
@@ -32,4 +32,12 @@ class ProfileProductSerializer(serializers.ModelSerializer):
 
         read_only_fileds = (
             'seller',
+        )
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        exclude = (
+            'register_date',
         )

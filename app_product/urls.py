@@ -11,6 +11,9 @@ urlpatterns = [
     # get products by category
     path('categories/<slug:category_slug>/', views.FilterProducByCategoryView.as_view(), name='show_category_filter_product'),
 
+    # show list of categories
+    path('categories/', views.CategoryListView.as_view(), name='show_categories'),
+
     # get, create, update, delete product for seller user
     path('', views.ProfileProductListView.as_view(), name='list_of_product'),
     path('create/', views.CreateProductView.as_view(), name='create_product'),

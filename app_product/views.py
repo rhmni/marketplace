@@ -4,8 +4,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
-from app_product.serializers import ProfileProductSerializer
-from app_product.models import Product
+from app_product.serializers import ProfileProductSerializer, CategorySerializer
+from app_product.models import Product, Category
 from app_product.serializers import ProductGetSerializer
 from permissions import IsSellerOfProduct, IsSellerAndHasStore
 
@@ -122,4 +122,20 @@ class ProfileProductListView(GenericAPIView):
     def get(self, request):
         products = request.user.store.products.all()
         srz_data = self.serializer_class(instance=products, many=True)
+        return Response(data=srz_data.data, status=status.HTTP_200_OK)
+
+
+class CategoryListView(GenericAPIView):
+    """
+        get list of categories for show to all users
+    """
+
+    serializer_class = CategorySerializer
+    permission_classes = (
+        AllowAny,
+    )
+
+    def get(self, request):
+        categories = Category.objects.all()
+        srz_data = self.serializer_class(instance=categories, many=True)
         return Response(data=srz_data.data, status=status.HTTP_200_OK)
