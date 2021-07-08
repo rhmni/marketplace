@@ -4,16 +4,16 @@ from django.db import models
 from app_product.models import Product
 
 
-class Bookmark(models.Model):
+class Like(models.Model):
     user = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='bookmarks',
+        related_name='likes',
     )
     product = models.ForeignKey(
         to=Product,
         on_delete=models.CASCADE,
-        related_name='bookmarks',
+        related_name='likes',
     )
     register_date = models.DateTimeField()
 

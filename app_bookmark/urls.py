@@ -2,7 +2,7 @@ from django.urls import path
 
 from app_bookmark import views
 
-app_name = 'bookmark'
+app_name = 'bookmarks'
 urlpatterns = [
     path('', views.ListBookmarkView.as_view(), name='show_bookmark'),
     path('add/', views.CreateBookmarkView.as_view(), name='add_bookmark'),

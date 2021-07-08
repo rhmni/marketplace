@@ -2,7 +2,7 @@ from django.urls import path
 
 from app_product import views
 
-app_name = 'product'
+app_name = 'products'
 urlpatterns = [
     # get 1 or list of products
     path('p/', views.ProductListView.as_view(), name='show_one_product'),

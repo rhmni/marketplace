@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'app_ticket.apps.AppTicketConfig',
     'app_order.apps.AppOrderConfig',
     'app_bookmark.apps.AppBookmarkConfig',
+    'app_like.apps.AppLikeConfig',
 ]
 
 MIDDLEWARE = [

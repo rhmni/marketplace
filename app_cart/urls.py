@@ -2,7 +2,7 @@ from django.urls import path
 
 from app_cart import views
 
-app_name = 'stroe'
+app_name = 'stroes'
 urlpatterns = [
     path('detail/<slug:coupon>/', views.RetrieveCartView.as_view(), name='cart_detail_with_coupon'),
     path('detail/', views.RetrieveCartView.as_view(), name='cart_detail'),

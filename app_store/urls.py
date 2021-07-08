@@ -2,7 +2,7 @@ from django.urls import path
 
 from app_store import views
 
-app_name = 'store'
+app_name = 'stores'
 
 urlpatterns = [
     path('', views.RetrieveStoreView.as_view(), name='retrieve_store'),

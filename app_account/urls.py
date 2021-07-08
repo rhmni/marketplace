@@ -6,7 +6,7 @@ from rest_framework_simplejwt.views import (
 
 from app_account import views
 
-app_name = 'account'
+app_name = 'accounts'
 urlpatterns = [
     # JWT Authentication
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
