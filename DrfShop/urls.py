@@ -13,6 +13,7 @@ urlpatterns = [
     path('orders/', include('app_order.urls', namespace='order')),
     path('bookmarks/', include('app_bookmark.urls', namespace='bookmark')),
     path('likes/', include('app_like.urls', namespace='likes')),
+    path('comments/', include('app_comment.urls', namespace='comments')),
 
     # for doc
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),

@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'app_order.apps.AppOrderConfig',
     'app_bookmark.apps.AppBookmarkConfig',
     'app_like.apps.AppLikeConfig',
+    'app_comment.apps.AppCommentConfig',
 ]
 
 MIDDLEWARE = [
